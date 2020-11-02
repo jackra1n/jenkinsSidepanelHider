@@ -14,19 +14,19 @@
 
     GM_addStyle('.jenkinsEnhancer-btn {background: white; padding: 0;}');
 
-    GM_config.init({
-        'id': 'MyConfig', // The id used for this instance of GM_config
-        'fields': // Fields object
+    GM_config.init(
+    {
+      'id': 'MyConfig', // The id used for this instance of GM_config
+      'fields': // Fields object
         {
-            'sidepanelWidth': // This is the id of the field
+          'sidepanelWidth': // This is the id of the field
             {
-                'label': 'side-panel width', // Appears next to field
-                'type': 'int', // Makes this setting a text field
-                'default': '310' // Default value if user doesn't change it
+              'label': 'side-panel width', // Appears next to field
+              'type': 'int', // Makes this setting a text field
+              'default': '310' // Default value if user doesn't change it
             }
         }
     });
-
 
     //Add material icons for button icons
     let head = document.getElementsByTagName("head")[0];
@@ -64,15 +64,25 @@
     sidePanel.style.transition = "0.5s";
     mainPanel.style.transition = "margin-left .5s";
 
-    buttonHide.addEventListener("click", () => {
+    buttonHide.addEventListener("click", ()=>{
         sidePanel.style.width = "0";
         buttonShow.style.display = "block";
+        window.localStorage.setItem("isSidepanelClosed", "true");
     });
-    buttonShow.addEventListener("click", () => {
-        sidePanel.style.width = GM_config.get('sidepanelWidth') + "px";
+
+    buttonShow.addEventListener("click", ()=>{
+        sidePanel.style.width = GM_config.get('sidepanelWidth')+"px";
         buttonShow.style.display = "none";
+        window.localStorage.setItem("isSidepanelClosed", "false");
     });
-    buttonSettings.addEventListener("click", () => {
+
+    if(window.localStorage.getItem("isSidepanelClosed") == "true")
+    {
+        buttonShow.style.display = "block";
+        sidePanel.style.width = "0";
+    }
+
+    buttonSettings.addEventListener("click", ()=> {
         GM_config.open();
-    })
+    });
 })();
