@@ -33,7 +33,6 @@
     sidePanel.insertBefore(buttonHide, sidePanel.childNodes[0]);
     mainPanel.insertBefore(buttonShow, mainPanel.childNodes[0]);
 
-    sidePanel.style.width = "0";
     sidePanel.style.overflowX = "hidden";
     sidePanel.style.transition = "0.5s";
     mainPanel.style.transition = "margin-left .5s";
