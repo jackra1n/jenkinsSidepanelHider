@@ -8,3 +8,7 @@ Simple script for [Tampermonkey](https://www.tampermonkey.net/) that adds button
 ---
 #### Closed<br/>
 ![Close](https://raw.githubusercontent.com/jackra1n/jenkinsSidepanelHider/main/screenshots/side-panel_close.png)
+---
+
+### Notes
+Make sure that you adjust the ```@match``` parameter to match your jenkins host.
