@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  Adds new buttons that allow you to hide the side panel on jenkins job pipelines
 // @author       jackra1n
-// @match        https://jenkins.ivyteam.io/job/*/job/*/
+// @match        https://jenkins*/job/*/job/*/
 // @grant        none
 // ==/UserScript==
 
