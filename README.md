@@ -1,6 +1,6 @@
 ## jenkinsSidepanelHider
 
-Simple script for [Tampermonkey](https://www.tampermonkey.net/) that adds buttons for closing the sidepanel on job pipelines.
+Simple script for [Tampermonkey](https://www.tampermonkey.net/) that adds buttons for closing the sidepanel on [Jenkins](https://www.jenkins.io/) job pipelines.
 ### Screenshots
 
 #### Open<br/>
