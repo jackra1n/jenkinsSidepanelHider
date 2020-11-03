@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Jenkins Pipeline Sidepanel Hider
 // @namespace    https://github.com/jackra1n
-// @version      1.0
+// @version      1.1
 // @description  Adds new buttons that allow you to hide the side panel on jenkins job pipelines
 // @author       jackra1n
 // @match        *://jenkins.*/
@@ -19,11 +19,11 @@
       'id': 'MyConfig', // The id used for this instance of GM_config
       'fields': // Fields object
         {
-          'sidepanelWidth': // This is the id of the field
+            'sidepanelWidth': // This is the id of the field
             {
-              'label': 'side-panel width', // Appears next to field
-              'type': 'int', // Makes this setting a text field
-              'default': '310' // Default value if user doesn't change it
+                'label': 'side-panel width', // Appears next to field
+                'type': 'int', // Makes this setting a text field
+                'default': '310' // Default value if user doesn't change it
             }
         }
     });
