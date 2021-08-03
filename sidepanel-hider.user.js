@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Jenkins Pipeline Sidepanel Hider
 // @namespace    https://github.com/jackra1n
-// @version      1.1
+// @version      1.2
 // @description  Adds new buttons that allow you to hide the side panel on jenkins job pipelines
 // @author       jackra1n
 // @match        *://jenkins.*/
@@ -13,13 +13,18 @@
 (function () {
 
   GM_addStyle(`
-    .custom-jenkins-button {
+    .custom-jenkins-btn {
       padding: 0;
       width: 30px;
       height: 30px;
       display: block;
       justify-content: center;
       align-items: center;
+    }
+
+    .jenkins-stats-btn {
+      height: 30px;
+      width: 90px;
     }
 
     .topbar-container {
@@ -38,6 +43,12 @@
           'label': 'side-panel width', // Appears next to field
           'type': 'int', // Makes this setting a text field
           'default': '310' // Default value if user doesn't change it
+        },
+        'defaultStatsVisibility':
+        {
+          'label': 'stats hidden by default', // Appears next to field
+          'type': 'checkbox', // Makes this setting a text field
+          'default': 'true' // Default value if user doesn't change it
         }
       }
     });
@@ -54,8 +65,9 @@
   let mainPanel = $("main-panel");
   let header = $("header");
   let stats = mainPanel.querySelectorAll('div[style="float:right"]')[0];
-
-  console.log(stats);
+  let additionalInfo = mainPanel.querySelectorAll('table[style="margin-top: 1em; margin-left:1em;"]')[0];
+  let additionalInfoBody = additionalInfo.childNodes[0];
+  let buildHistory = $("buildHistoryPage");
 
   let buttonSettings = document.createElement("button");
   let buttonHide = document.createElement("button");
@@ -65,20 +77,23 @@
 
   jobViewTopbarContainer.className = "topbar-container";
 
+  additionalInfo.style.margin = "0";
+  additionalInfoBody.style.display = "flex";
+
   buttonSettings.innerHTML = '<i class="material-icons">settings</i>';
   buttonSettings.style.padding = "0";
 
   buttonHide.style.float = "right";
   buttonHide.style.marginRight = "15px";
   buttonHide.innerHTML = '<i class="material-icons">keyboard_arrow_left</i>';
-  buttonHide.className = "custom-jenkins-button";
+  buttonHide.className = "custom-jenkins-btn";
 
-  buttonShow.style.visibility = "hidden";
-  buttonShow.className = "custom-jenkins-button";
+  //buttonShow.style.visibility = "hidden";
+  buttonShow.className = "custom-jenkins-btn";
   buttonShow.innerHTML = '<i class="material-icons">keyboard_arrow_right</i>';
 
-  buttonToggleStats.innerHTML = '<i class="material-icons">keyboard_arrow_up</i>';
-  buttonToggleStats.className = "custom-jenkins-button";
+  buttonToggleStats.innerHTML = 'Hide stats';
+  buttonToggleStats.className = "jenkins-stats-btn";
 
   header.insertBefore(buttonSettings, header.childNodes[2]);
   sidePanel.insertBefore(buttonHide, sidePanel.childNodes[0]);
@@ -92,37 +107,40 @@
   mainPanel.style.transition = "margin-left .5s";
 
   buttonHide.addEventListener("click", () => {
-    sidePanel.style.width = "0";
-    buttonShow.style.visibility = "visible";
+    sidePanel.style.width = "0px";
+    //buttonShow.style.visibility = "visible";
+    buildHistory.style.visibility = "hidden";
     window.localStorage.setItem("isSidepanelClosed", "true");
   });
 
   buttonShow.addEventListener("click", () => {
     sidePanel.style.width = GM_config.get('sidepanelWidth') + "px";
-    buttonShow.style.visibility = "hidden";
+    //buttonShow.style.visibility = "hidden";
+    buildHistory.style.visibility = "visible";
     window.localStorage.setItem("isSidepanelClosed", "false");
   });
 
   buttonToggleStats.addEventListener("click", () => {
-    //if (stats.style.display == "none") {
     if (stats.style.visibility == "hidden") {
-      //stats.style.display = "block";
       stats.style.height = "fit-content";
       stats.style.visibility = "visible";
-      buttonToggleStats.innerHTML = '<i class="material-icons">keyboard_arrow_down</i>';
-      console.log("open");
+      buttonToggleStats.innerHTML = 'Hide stats';
     }else {
-      //stats.style.display = "none";
       stats.style.height = "0";
       stats.style.visibility = "hidden";
-      buttonToggleStats.innerHTML = '<i class="material-icons">keyboard_arrow_up</i>';
-      console.log("close");
+      buttonToggleStats.innerHTML = 'Show stats';
     }
   });
 
   if (window.localStorage.getItem("isSidepanelClosed") == "true") {
     buttonShow.style.visibility = "visible";
     sidePanel.style.width = "0";
+  }
+
+  if (GM_config.get('defaultStatsVisibility') == "true") {
+    buttonToggleStats.innerHTML = 'Show stats';
+    stats.style.height = "0";
+    stats.style.visibility = "hidden";
   }
 
   buttonSettings.addEventListener("click", () => {
