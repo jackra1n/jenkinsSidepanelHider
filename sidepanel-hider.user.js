@@ -41,13 +41,13 @@
         'sidepanelWidth': // This is the id of the field
         {
           'label': 'side-panel width', // Appears next to field
-          'type': 'int', // Makes this setting a text field
+          'type': 'int',
           'default': '310' // Default value if user doesn't change it
         },
         'defaultStatsVisibility':
         {
           'label': 'stats hidden by default', // Appears next to field
-          'type': 'checkbox', // Makes this setting a text field
+          'type': 'checkbox',
           'default': 'true' // Default value if user doesn't change it
         }
       }
@@ -88,7 +88,6 @@
   buttonHide.innerHTML = '<i class="material-icons">keyboard_arrow_left</i>';
   buttonHide.className = "custom-jenkins-btn";
 
-  //buttonShow.style.visibility = "hidden";
   buttonShow.className = "custom-jenkins-btn";
   buttonShow.innerHTML = '<i class="material-icons">keyboard_arrow_right</i>';
 
@@ -108,14 +107,12 @@
 
   buttonHide.addEventListener("click", () => {
     sidePanel.style.width = "0px";
-    //buttonShow.style.visibility = "visible";
     buildHistory.style.visibility = "hidden";
     window.localStorage.setItem("isSidepanelClosed", "true");
   });
 
   buttonShow.addEventListener("click", () => {
     sidePanel.style.width = GM_config.get('sidepanelWidth') + "px";
-    //buttonShow.style.visibility = "hidden";
     buildHistory.style.visibility = "visible";
     window.localStorage.setItem("isSidepanelClosed", "false");
   });
@@ -137,7 +134,7 @@
     sidePanel.style.width = "0";
   }
 
-  if (GM_config.get('defaultStatsVisibility') == "true") {
+  if (GM_config.get('defaultStatsVisibility') == true) {
     buttonToggleStats.innerHTML = 'Show stats';
     stats.style.height = "0";
     stats.style.visibility = "hidden";
