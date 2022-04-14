@@ -15,4 +15,4 @@ If you have Tampermonkey installed just click this [Install](https://github.com/
 ---
 
 ### Notes
-Make sure that you adjust the ```@match``` parameter to match your jenkins host.
+If the script doesn't detect your jenkins host you might have to adjust ```@include``` parameter to match your jenkins host.
