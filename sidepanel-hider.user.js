@@ -4,7 +4,7 @@
 // @version      1.3
 // @description  Adds new buttons that allow you to hide the side panel on jenkins job pipelines
 // @author       jackra1n
-// @include      /^(http[s]?):\/\/.*jenkins.*$/
+// @match        /^(http[s]?):\/\/.*jenkins.*$/
 // @require      https://openuserjs.org/src/libs/sizzle/GM_config.js
 // @grant        GM_getValue
 // @grant        GM_setValue

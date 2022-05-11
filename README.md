@@ -7,12 +7,9 @@ If you have Tampermonkey installed just click this [Install](https://github.com/
 
 ### Screenshots
 
-#### Open<br/>
-![Open](https://raw.githubusercontent.com/jackra1n/jenkinsSidepanelHider/main/screenshots/side-panel_open.png)
----
-#### Closed<br/>
-![Close](https://raw.githubusercontent.com/jackra1n/jenkinsSidepanelHider/main/screenshots/side-panel_close.png)
+#### Preview<br/>
+![Preview](https://raw.githubusercontent.com/jackra1n/jenkinsSidepanelHider/main/screenshots/example.gif)
 ---
 
 ### Notes
-If the script doesn't detect your jenkins host you might have to adjust ```@include``` parameter to match your jenkins host.
+If the script doesn't detect your jenkins host you might have to adjust ```@match``` parameter to match your jenkins host.
